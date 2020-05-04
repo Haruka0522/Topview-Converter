@@ -10,6 +10,8 @@ def get_options():
     parser.add_argument("--images", default="images", type=str,
                         help="Image / Directory containing images to convert")
     parser.add_argument("--img_size", default=(300, 600))
+    parser.add_argument("--output", default="output", type=str,
+                        help="save directory")
 
     return parser.parse_args()
 
@@ -63,4 +65,4 @@ if __name__ == "__main__":
 
         result = cv2.warpPerspective(image, M, result_size)
 
-        cv2.imwrite("{}.jpg".format(idx), result)
+        cv2.imwrite("{}/{}.jpg".format(options.output,idx), result)
