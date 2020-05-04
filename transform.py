@@ -3,6 +3,7 @@ import cv2
 import argparse
 import glob
 import numpy as np
+import os
 
 
 def get_options():
@@ -44,6 +45,10 @@ if __name__ == "__main__":
     options = get_options()
     result_size = options.img_size
 
+    # make output directory
+    if not os.path.exists(options.output):
+        os.makedirs(options.output)
+
     # input images
     dir_path = options.images
     if dir_path[-4:] in [".png", ".jpg"]:
@@ -65,4 +70,4 @@ if __name__ == "__main__":
 
         result = cv2.warpPerspective(image, M, result_size)
 
-        cv2.imwrite("{}/{}.jpg".format(options.output,idx), result)
+        cv2.imwrite("{}/{}.jpg".format(options.output, idx), result)
